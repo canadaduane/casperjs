@@ -1,4 +1,5 @@
 phantom.injectJs('casper.js');
+phantom.injectJs('gibberish-aes.js');
 
 var casper = new phantom.Casper({
     faultTolerant: false,
@@ -29,6 +30,12 @@ casper.test.assert(casper.result.log.some(function(e) {
 }), 'log() adds a log entry');
 casper.options.logLevel = oldLevel;
 casper.options.verbose = true;
+
+// Casper#aesEncode()
+casper.test.comment('encryption');
+casper.test.assertMatch(casper.aesEncode('XYZ', 'password'), /^U2FsdGVkX19/, "aesEncode() can encode text with a password");
+// Casper#aesDecode()
+casper.test.assertEquals(casper.aesDecode('U2FsdGVkX19E7XPHLmsEOvXDxTpIl26iRKIv4EcStg8=', 'password'), "XYZ", "aesDecode() can decode text with a password");
 
 // Casper#start()
 casper.test.comment('navigating');

@@ -96,6 +96,39 @@
         },
 
         /**
+         * Use Gibberish AES library to encode a string using a password.
+         *
+         * @param  String  text        Some text to encode
+         * @param  String  password    The password to use to encode the text
+         * @return String              AES encoded result
+         */
+        aesEncode: function(text, password) {
+            try {
+                var encode = GibberishAES.enc;
+            } catch (e) {
+                throw 'GibberishAES library not found. Did you forget to phantom.injectJs("gibberish-aes.js")?';
+            }
+            return encode(text, password);
+        },
+
+        /**
+         * Use Gibberish AES library to decode a string using a password.
+         *
+         * @param  String  text        Some text to decode
+         * @param  String  password    The password to use to decode the text
+         * @return String              Decoded result
+         */
+        aesDecode: function(text, password) {
+            try {
+                var decode = GibberishAES.dec;
+            } catch (e) {
+                throw 'GibberishAES library not found. Did you forget to phantom.injectJs("gibberish-aes.js")?';
+            }
+            return decode(text, password);
+        },
+
+
+        /**
          * Proxy method for WebPage#render. Adds a clipRect parameter for
          * automatically set page clipRect setting values and sets it back once
          * done.
@@ -933,7 +966,7 @@
     };
 
     /**
-     * Casper tester: makes assertions, stores test results and display then.
+     * Casper tester: makes assertions, stores test results and display them.
      *
      */
     phantom.Casper.Tester = function(casper, options) {
