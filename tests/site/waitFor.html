@@ -2,16 +2,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>CasperJS test index</title>
+        <title>waitFor test</title>
     </head>
     <body>
         <img src="images/phantom.png"/>
-        <a href="test.html">test</a>
-        <a href="form.html">form</a>
         <ul>
             <li>one</li>
             <li>two</li>
             <li>three</li>
         </ul>
+        <script>
+        setTimeout(function() {
+            var li = document.createElement('li')
+            li.appendChild(document.createTextNode('four'));
+            document.querySelector('ul').appendChild(li);
+        }, 2000);
+        </script>
     </body>
 </html>
