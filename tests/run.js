@@ -1,5 +1,4 @@
 phantom.injectJs('casper.js');
-phantom.injectJs('gibberish-aes.js');
 
 var casper = new phantom.Casper({
     faultTolerant: false,
